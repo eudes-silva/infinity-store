@@ -1,5 +1,5 @@
 <template>
-  <div class="favorites">This is favorites page</div>
+  <div class="favorites bg-green">This is favorites page</div>
 </template>
 <style lang="scss" scoped>
 .favorites {

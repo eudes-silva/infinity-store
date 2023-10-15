@@ -1,21 +1,35 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "@/pages/index.vue";
+import layoutDefault from "@/layouts/default.vue";
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
       path: "/",
-      component: Home,
+      component: layoutDefault,
       name: "Home",
+      children: [
+        {
+          path: "/",
+          name: "Home",
+          component: () => import("@/pages/index.vue"),
+        },
+      ],
       meta: {
         title: "Home",
       },
     },
     {
       path: "/favorites",
-      component: () => import("@/pages/favorites.vue"),
+      component: layoutDefault,
       name: "Favorites",
+      children: [
+        {
+          path: "/favorites",
+          name: "Favorites",
+          component: () => import("@/pages/favorites.vue"),
+        },
+      ],
       meta: {
         title: "Favorites",
       },

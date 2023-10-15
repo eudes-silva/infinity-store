@@ -1,14 +1,3 @@
-<script setup lang="ts">
-import Header from "@/components/Header.vue";
-</script>
 <template>
-  <Header />
-  <main class="wrapper">
-    <router-view></router-view>
-  </main>
+  <router-view></router-view>
 </template>
-<style lang="scss">
-.wrapper {
-  height: 100%;
-}
-</style>

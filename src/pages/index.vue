@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import Card from "@/components/organisms/Card.vue";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 import { useIntersectionObserver } from "@vueuse/core";
 import { useDisplay } from "vuetify";
 const { mobile } = useDisplay();
@@ -10,10 +10,14 @@ const store = useFavoritesStore();
 const products: any = ref([]);
 const infiniteLoadScroll = ref(null);
 const offset = ref(0);
+const maxProductsToDisplay = ref(60);
 
 onMounted(() => {
   products.value = [];
   fetchProducts();
+});
+const scrollActive = computed(() => {
+  return products.value.length < maxProductsToDisplay.value;
 });
 async function fetchProducts() {
   try {
@@ -22,7 +26,7 @@ async function fetchProducts() {
     )
       .then((res) => res.json())
       .then((json) => json);
-    if (products.value.length < 60) {
+    if (scrollActive.value) {
       products.value.push(...response.products);
     }
   } catch (error) {
@@ -82,7 +86,7 @@ function formatCurrency(value: number) {
         </Card>
       </v-col>
     </v-row>
-    <div v-if="products.length !== 60" class="text-center">
+    <div v-if="scrollActive" class="text-center">
       <v-progress-circular
         :size="36"
         :width="6"

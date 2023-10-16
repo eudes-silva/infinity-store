@@ -4,6 +4,8 @@ import { onMounted, ref } from "vue";
 import { useIntersectionObserver } from "@vueuse/core";
 import { useDisplay } from "vuetify";
 const { mobile } = useDisplay();
+import { useFavoritesStore } from "@/stores/FavoritesStore";
+const store = useFavoritesStore();
 
 const products: any = ref([]);
 const infiniteLoadScroll = ref(null);
@@ -42,9 +44,6 @@ function formatCurrency(value: number) {
     currency: "BRL",
   }).format(value);
 }
-function toggleFavorite(value: object) {
-  console.log(value);
-}
 </script>
 <template>
   <v-container class="h-100 pt-16 pb-0">
@@ -61,10 +60,14 @@ function toggleFavorite(value: object) {
           <template #cover>
             <v-img :src="product.images[2]" transition="fade-transition">
               <v-icon
-                @click="toggleFavorite(product)"
+                @click="store.toggleFavorite(product)"
                 class="favorite-icon"
                 size="36"
-                >mdi-heart-outline</v-icon
+                >{{
+                  store.favorites.some((item) => item.id == product.id)
+                    ? "mdi-heart"
+                    : "mdi-heart-outline"
+                }}</v-icon
               >
             </v-img>
           </template>

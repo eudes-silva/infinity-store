@@ -1,6 +1,7 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import "@mdi/font/css/materialdesignicons.css";
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 
 // Vuetify
 import "vuetify/styles";
@@ -18,6 +19,7 @@ const vuetify = createVuetify({
 });
 
 const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
 const app = createApp(App);
 
 app.use(vuetify);

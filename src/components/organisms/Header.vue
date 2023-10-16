@@ -17,10 +17,10 @@ const props = withDefaults(
 <template>
   <header
     :class="mobile ? 'px-4' : 'px-10'"
-    class="header d-flex justify-space-between align-center py-8 bg-white w-100 elevation-4"
+    class="bg-grey-darken-4 header d-flex justify-space-between align-center py-8 bg-white w-100 elevation-6"
   >
     <span v-if="$slots.appTitle" class="text-h4 font-weight-bold">
-      <router-link to="/" class="text-grey-darken-4 text-decoration-none">
+      <router-link to="/" class="text-white text-decoration-none">
         <slot name="appTitle">
           {{ props.appTitle }}
         </slot>
@@ -29,12 +29,12 @@ const props = withDefaults(
     <nav>
       <ul class="d-flex">
         <li
-          class="nav-item ml-6"
+          class="nav-item ml-8"
           v-for="navItem in props.navItems"
           :key="navItem.id"
         >
           <router-link
-            class="text-grey-darken-4 text-decoration-none"
+            class="text-white text-decoration-none font-weight-medium"
             :to="navItem.path"
             >{{ navItem.title }}</router-link
           >
@@ -47,7 +47,6 @@ const props = withDefaults(
 .header {
   position: fixed;
   z-index: 10;
-  border-bottom: 1px solid #212121;
 }
 .nav-item {
   list-style-type: none;

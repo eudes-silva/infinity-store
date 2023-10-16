@@ -18,12 +18,12 @@ onMounted(() => {
 async function fetchProducts() {
   try {
     const response = await fetch(
-      `https://api.escuelajs.co/api/v1/products?offset=${offset.value}&limit=20`
+      `https://api.slingacademy.com/v1/sample-data/products?offset=${offset.value}&limit=20`
     )
       .then((res) => res.json())
       .then((json) => json);
     if (products.value.length < 60) {
-      products.value.push(...response);
+      products.value.push(...response.products);
     }
   } catch (error) {
     console.error(error);
@@ -50,7 +50,7 @@ function formatCurrency(value: number) {
     <v-row :class="mobile ? 'mx-2' : 'mx-8'" class="h-90 mb-14 mt-4 pt-16">
       <v-col
         v-for="product in products"
-        :key="product.index"
+        :key="product.id"
         cols="xl-2 lg-3 md-4 sm-1"
       >
         <Card
@@ -58,7 +58,7 @@ function formatCurrency(value: number) {
           props-class="product-card h-100 rounded-lg bg-white elevation-5"
         >
           <template #cover>
-            <v-img :src="product.images[2]" transition="fade-transition">
+            <v-img :src="product.photo_url" transition="fade-transition">
               <v-icon
                 @click="store.toggleFavorite(product)"
                 class="favorite-icon"
@@ -73,7 +73,7 @@ function formatCurrency(value: number) {
           </template>
           <template #content>
             <div class="d-flex justify-space-between pa-4">
-              <span>{{ product.title }}</span
+              <span>{{ product.name }}</span
               ><span class="font-weight-bold">{{
                 formatCurrency(product.price)
               }}</span>
@@ -82,7 +82,7 @@ function formatCurrency(value: number) {
         </Card>
       </v-col>
     </v-row>
-    <div v-if="products.length !== 60" class="text-center pb-14">
+    <div v-if="products.length !== 60" class="text-center">
       <v-progress-circular
         :size="36"
         :width="6"

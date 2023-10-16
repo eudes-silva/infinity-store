@@ -1,14 +1,9 @@
 <script setup lang="ts">
-import Header from "@/components/Header.vue";
+import Header from "@/components/organisms/Header.vue";
 </script>
 <template>
-  <Header />
-  <main class="wrapper">
-    <router-view></router-view>
-  </main>
+  <Header>
+    <template #appTitle> CaseStore </template>
+  </Header>
+  <router-view></router-view>
 </template>
-<style lang="scss">
-.wrapper {
-  height: 100%;
-}
-</style>

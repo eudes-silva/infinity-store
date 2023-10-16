@@ -92,7 +92,7 @@ function formatCurrency(value: number) {
     </div>
   </v-container>
 </template>
-<style>
+<style lang="scss" scoped>
 .product-card {
   position: relative;
 }

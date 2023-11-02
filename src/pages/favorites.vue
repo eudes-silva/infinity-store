@@ -20,11 +20,11 @@ function formatCurrency(value: number) {
       <v-col
         v-for="favorite in favorites"
         :key="favorite.id"
-        cols="xl-2 lg-3 md-4 sm-1"
+        cols="xl-2 lg-3 md-4 sm-1 mx-auto favorite-col mb-16"
       >
         <Card
           kind="secondary"
-          props-class="favorite-card h-100 rounded-lg bg-white elevation-5"
+          props-class="favorite-card h-100 rounded-lg bg-white elevation-5 mx-auto"
         >
           <template #cover>
             <v-img :src="favorite.photo_url" transition="fade-transition">
@@ -40,17 +40,29 @@ function formatCurrency(value: number) {
             </div>
           </template>
         </Card>
+        <v-btn
+          @click="store.removeFavorite(favorite.id)"
+          icon
+          variant="outlined"
+          class="remove-favorite-icon text-red mt-5"
+          ><v-icon>mdi-close</v-icon></v-btn
+        >
       </v-col>
     </v-row>
   </v-container>
 </template>
 <style lang="scss" scoped>
-.product-card {
+.favorite-col {
   position: relative;
 }
 .favorite-icon {
   position: absolute;
   top: 20px;
   right: 20px;
+}
+.remove-favorite-icon {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 </style>

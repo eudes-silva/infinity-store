@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import { useDisplay } from "vuetify";
 const { mobile } = useDisplay();
+
+import { useRoute } from "vue-router";
+const route = useRoute();
+
 const props = withDefaults(
   defineProps<{
     navItems?: { id: number; path: string; title: string }[];
@@ -29,9 +33,12 @@ const props = withDefaults(
     <nav>
       <ul class="d-flex">
         <li
-          class="nav-item ml-8"
+          class="nav-item ml-8 user-select-none"
           v-for="navItem in props.navItems"
           :key="navItem.id"
+          :class="{
+            'text-decoration-underline': navItem.path === route.fullPath,
+          }"
         >
           <router-link
             class="text-white text-decoration-none font-weight-medium"
@@ -50,5 +57,7 @@ const props = withDefaults(
 }
 .nav-item {
   list-style-type: none;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 3px !important;
 }
 </style>

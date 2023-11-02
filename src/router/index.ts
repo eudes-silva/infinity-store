@@ -31,7 +31,7 @@ const router = createRouter({
         },
       ],
       meta: {
-        title: "Favorites",
+        title: "Favoritos",
       },
     },
     {

@@ -40,5 +40,9 @@ export const useFavoritesStore = defineStore("favorites", () => {
     }
   }
 
-  return { favorites, toggleFavorite };
+  function removeFavorite(id: number) {
+    favorites.value = favorites.value.filter((favorite) => favorite.id !== id);
+  }
+
+  return { favorites, toggleFavorite, removeFavorite };
 });
